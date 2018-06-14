@@ -4,34 +4,41 @@ import Menu from './components/Menu';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
 import Orders from './components/Orders';
+//import Table from './components/Table';
 
 class App extends Component {
   state={
     tabs:['Orders', 'Statistics', 'Settings'],
-    activeTab:0
+    categories:['drink', 'dish', 'dessert', 'special'],
+    activeTab:0,
+    activeCat:0
   };
+
   switchTab = (i)=>{
     this.setState({activeTab:i})
   };
 
-  renderContent = ()=>{
-    switch (this.state.activeTab){
-      case 0 : return <Orders/>;
-      case 1 : return <Statistics/>;
-      case 2 : return <Settings/>;
-      default: return null;
-    }
-  };
+  switchCat = activeCat => this.setState({activeCat});
+
 
   render() {
+      const content =[
+        <Orders/>,
+        <Statistics/>,
+        <Settings/>
+      ];
+
     return (
         <div>
           <Header
               active={this.state.activeTab}
               switchTab={this.switchTab}
               tabs={this.state.tabs}/>
-          <Menu/>
-          {this.renderContent()}
+          <Menu
+              switchCat={this.switchCat}
+              active={this.state.activeCat}
+              categories={this.state.categories}/>
+          {content[this.state.activeTab]}
         </div>
     );
   }
