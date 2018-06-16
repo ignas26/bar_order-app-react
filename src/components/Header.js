@@ -15,7 +15,7 @@ const Header = (props) => {
       <header>
         <h2>Menu</h2>
         <nav>
-          <h1>Home <span>Grill</span></h1>
+          <h1>Bar <span>Order</span></h1>
           <ul>
             {tabs}
           </ul>

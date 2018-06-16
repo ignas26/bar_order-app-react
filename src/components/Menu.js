@@ -18,18 +18,26 @@ const Menu = (props)=>{
     )
   });
 
+  const items = props.menu && props.menu.map((item,i)=>{
+    return (
+        <li onClick={()=>props.addOrder(item)}
+            key={i}>
+          {item.name}
+          <span>{item.price}€</span>
+        </li>
+    )
+  });
+
   return (
       <div className="menu">
         <div className="categories">
           {categories}
         </div>
         <ul className="menu-items">
-          <li>
-            preke
-            <span>1.20$</span>
-          </li>
+          {items}
         </ul>
       </div>
   );
 };
+
 export default Menu
