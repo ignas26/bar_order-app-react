@@ -5,6 +5,9 @@ const Orders = (props)=>{
   const tables = props.tables.map((table,i)=>{
     return (
         <Table
+            checkout={props.checkout}
+            removeOrder={props.removeOrder}
+            orders={props.orders}
             i={i}
             switchTable={props.switchTable}
             active={props.activeTable}

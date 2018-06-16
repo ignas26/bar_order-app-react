@@ -4,7 +4,6 @@ import Menu from './components/Menu';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
 import Orders from './components/Orders';
-//import Table from './components/Table';
 import axios from 'axios';
 
 class App extends Component {
@@ -21,7 +20,7 @@ class App extends Component {
 
   addOrder=(order)=>{
     const orders =
-        [...this.state.orders, {...order,table:this.state.activeTable}]
+        [...this.state.orders, {...order,table:this.state.activeTable}];
     this.setState({orders})
   };
 
@@ -46,6 +45,7 @@ class App extends Component {
   render() {
       const content =[
         <Orders
+            orders={this.state.orders}
             switchTable={this.switchTable}
             activeTable={this.state.activeTable}
             tables={this.state.tables}/>,
