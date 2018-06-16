@@ -5,24 +5,48 @@ import Settings from './components/Settings';
 import Statistics from './components/Statistics';
 import Orders from './components/Orders';
 import axios from 'axios';
+import _ from 'lodash';
 
 class App extends Component {
   state={
     tabs:['Orders', 'Statistics', 'Settings'],
-    categories:['drink', 'dish', 'dessert', 'special'],
+    categories:['drinks', 'dishes', 'deserts', 'special'],
     activeTab:0,
     activeCat:0,
     menu:{},
     tables:['Table 1', 'Table 2', 'Table 3', 'Table 4'],
     activeTable:0,
-    orders:[]
+    orders:[],
+    completed:[]
+  };
+
+  addSpecial = (item)=>{
+    const menu={...this.state.menu,
+      special:[...this.state.menu.special, item]};
+    this.setState({menu})
+  };
+
+  checkout =(i)=>{
+    console.log(i);
+    const completed=[...this.state.completed];
+    const orders = this.state.orders.filter(order=>{
+      if(order.table===i) completed.push(order);
+      return order.table!==i
+    });
+    this.setState({orders, completed})
   };
 
   addOrder=(order)=>{
     const orders =
-        [...this.state.orders, {...order,table:this.state.activeTable}];
+        [...this.state.orders,
+          {...order,table:this.state.activeTable, id:_.uniqueId()}];
     this.setState({orders})
   };
+
+  removeOrder = (id)=>{
+    this.setState({orders:this.state.orders.filter((o)=>o.id!==id)})
+  };
+
 
   switchTab = (i)=>{
     this.setState({activeTab:i})
@@ -38,18 +62,21 @@ class App extends Component {
     const url ='https://enigmatic-cliffs-25405.herokuapp.com/menu';
     axios.get(url).then((res)=>{
       console.log(res);
-      this.setState({menu:res.data.menu})
+      this.setState({menu:res.data.menu});
+      console.log(this.state.menu);
     })
   }
 
   render() {
       const content =[
         <Orders
+            checkout={this.checkout}
+            removeOrder={this.removeOrder}
             orders={this.state.orders}
             switchTable={this.switchTable}
             activeTable={this.state.activeTable}
             tables={this.state.tables}/>,
-        <Statistics/>,
+        <Statistics completed={this.state.completed}/>,
         <Settings/>
       ];
 
