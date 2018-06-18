@@ -20,9 +20,9 @@ class App extends Component {
     completed:[]
   };
 
-  addSpecial = (item)=>{
-    const menu={...this.state.menu,
-      special:[...this.state.menu.special, item]};
+  addSpecial = (menuItem)=>{
+    const special=[...this.state.menu.special, menuItem];
+    const menu={...this.state.menu, special};
     this.setState({menu})
   };
 
@@ -77,7 +77,7 @@ class App extends Component {
             activeTable={this.state.activeTable}
             tables={this.state.tables}/>,
         <Statistics completed={this.state.completed}/>,
-        <Settings/>
+        <Settings addSpecial={this.addSpecial} special={this.state.menu.special}/>
       ];
 
     return (

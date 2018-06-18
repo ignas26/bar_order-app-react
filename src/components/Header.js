@@ -11,6 +11,7 @@ const Header = (props) => {
         </li>
     )
   });
+
   return (
       <header>
         <h2>Menu</h2>

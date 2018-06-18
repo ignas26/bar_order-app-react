@@ -27,7 +27,7 @@
             transition: .2s;
         }
         &:hover img{
-            filter: grayscale(0) brightness(1);
+            filter: grayscale(45%);
         }
         &:hover h3{
             color: $dark-red;
@@ -37,7 +37,6 @@
         img{
             transition: 0.5s;
             height:70px;
-            filter: brightness(3);
         }
         &:hover{
             border:2px solid $dark-red;
@@ -45,7 +44,7 @@
     }
     .active {
         & img {
-            filter: grayscale(20) brightness(5);
+            filter: brightness(65%);
         }
         & h3 {
             color: $dark-red;
