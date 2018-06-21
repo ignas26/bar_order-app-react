@@ -10,13 +10,21 @@ class Settings extends React.Component{
     this.setState({temp:{...this.state.temp, [type]:value}})
   };
 
+  // savedInfo = () => {
+  //   var savedItem = localStorage.getItem('special');
+  //   JSON.parse(savedItem);
+  // };
+
   render(){
+    // const info = this.savedInfo();
+
+
     const items = this.props.special.map((item, i)=>{
       return (
           <li key={i}>
             {item.name}
-            <span className="delete">X</span>
-            <span className="price">{item.price}€</span>
+                <span onClick={() => this.props.removeSpecial(i)} className="delete">X</span>
+                <span className="price">{item.price}€</span>
           </li>
       )
     });

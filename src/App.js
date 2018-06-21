@@ -20,10 +20,20 @@ class App extends Component {
     completed:[]
   };
 
+
   addSpecial = (menuItem)=>{
     const special=[...this.state.menu.special, menuItem];
     const menu={...this.state.menu, special};
+    //localStorage.setItem('special', JSON.stringify(menu.special));
     this.setState({menu})
+  };
+
+  removeSpecial = (idx) =>{
+    const newSpecial = this.state.menu.special.filter((item,i)=>{
+      return i!==idx
+    });
+    const newMenu ={...this.state.menu,special:newSpecial};
+    this.setState({menu:newMenu})
   };
 
   checkout =(i)=>{
@@ -59,8 +69,8 @@ class App extends Component {
   };
 
   componentDidMount(){
-    const url ='https://enigmatic-cliffs-25405.herokuapp.com/menu';
-    axios.get(url).then((res)=>{
+    const URL = 'https://enigmatic-cliffs-25405.herokuapp.com/menu';
+    axios.get(URL).then((res)=>{
       console.log(res);
       this.setState({menu:res.data.menu});
       console.log(this.state.menu);
@@ -77,7 +87,7 @@ class App extends Component {
             activeTable={this.state.activeTable}
             tables={this.state.tables}/>,
         <Statistics completed={this.state.completed}/>,
-        <Settings addSpecial={this.addSpecial} special={this.state.menu.special}/>
+        <Settings addSpecial={this.addSpecial} removeSpecial={this.removeSpecial} special={this.state.menu.special}/>
       ];
 
     return (
