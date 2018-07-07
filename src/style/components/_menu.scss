@@ -54,15 +54,18 @@
     .menu-items{
         width:100%;
         li{
-            margin-top:10px;
+            border: 1px solid transparent;
+            margin-top:15px;
             cursor: pointer;
             text-align: left;
             background: $dark-grey;
             color: #fff;
             padding:10px 20px;
-            transition: .2s;
             font-size:16px;
             font-weight:300;
+            &:hover{
+                border: 1px solid $dark-red;
+            }
         }
         span{
             float: right;
