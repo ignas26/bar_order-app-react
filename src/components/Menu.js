@@ -36,6 +36,7 @@ const Menu = (props)=>{
         <ul className="menu-items">
           {items}
         </ul>
+        {props.menu? null : <div className="loader"/>}
       </div>
   );
 };

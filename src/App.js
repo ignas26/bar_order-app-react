@@ -74,7 +74,7 @@ class App extends Component {
       console.log(res);
       this.setState({menu:res.data.menu});
       console.log(this.state.menu);
-    })
+    });
   }
 
   render() {
